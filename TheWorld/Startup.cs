@@ -48,6 +48,7 @@ namespace TheWorld
 
             services.AddDbContext<WorldContext>();
             services.AddScoped<IWorldRepository, WorldRepository>();
+            services.AddTransient<GeoCoordsService>();
             services.AddTransient<WorldContextSeedData>();
             services.AddLogging();
             services.AddMvc()
@@ -64,7 +65,9 @@ namespace TheWorld
             Mapper.Initialize(config =>
             {
                 config.CreateMap<TripViewModel, Trip>().ReverseMap();
+                config.CreateMap<StopViewModel, Stop>().ReverseMap();
             });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
